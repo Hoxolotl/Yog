@@ -3,3 +3,16 @@ Yog-Sothoth knows the gate. Yog-Sothoth is the gate. Yog-Sothoth is the key and 
 
 # What is Yog?
 "Your own git" IS a tool to see how the code of a git repository was built. It shows over time which files were made by whom. When used it will be possible to see how the code works and which parts of the codebase are being left alone.
+
+# How to use?
+Run the getData.sh shell script in the root of your git repository. It will create a log.json. This Log.json contains all the git history.
+Run
+```
+node main.mjs
+```
+This will create a local express server on port 3000 where you can see a visualisation of the git history.
+
+
+# WIP
+* settings.json is used to configure the visualisation.
+* there will be different visualisations available, architecture tbd.
