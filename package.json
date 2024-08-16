@@ -1,0 +1,25 @@
+{
+  "name": "yug",
+  "version": "0.0.0",
+  "description": "Yog is a visualisation of a git repository history",
+  "main": "main.mjs",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hoxolotl/Yog.git"
+  },
+  "keywords": [
+    "visualisation",
+    "git",
+    "history",
+    "commits"
+  ],
+  "author": "Govert Combee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Hoxolotl/Yog/issues"
+  },
+  "homepage": "https://github.com/Hoxolotl/Yog#readme"
+}
