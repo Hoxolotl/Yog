@@ -43,7 +43,9 @@
           /* /Commands */
           /* Routes */
           routes: {
-            
+            "/" : function() {
+              editor.pageData.page = 'homepage'
+            }
           }
           /* /Routes */
         });
@@ -70,6 +72,48 @@
     <template id="menu">
       
     </template>
+    <template id="upload-file">
+      <h2>upload-file interface</h2>
+    
+    
+    
+    <h3>todolist</h3>
+    <ul>
+      <li>Find out how to cache stuff <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">cache mdn docs</a></li>
+      <li>will need to check if there's enough room in the cache -> StorageManager.estimate()</li>
+    </ul>
+    
+    <style>output {font-family: monospace;white-space: pre;}</style>
+    
+    <form data-js="convert">
+        <input name="file" required type="file" />
+        <button>Submit</button>
+    </form>
+    
+    <output></output>
+    
+    <script>
+    
+    const form = document.querySelector('form[data-js="convert"]')
+    const output = document.querySelector('output')
+    
+    form.addEventListener('submit', (event) => {
+            event.preventDefault()
+    
+            const file = event.target.file.files[0]
+    
+            const reader = new FileReader()
+    
+            reader.onload = (event) => {
+                const fileContent = event.target.result
+                
+                output.insertAdjacentHTML('beforeend', fileContent)
+            }
+    
+            reader.readAsText(file)
+        })
+    </script>
+    </template>
     <!-- /Component HTML templates -->
     <header data-simply-path="/" data-simply-field="header" data-simply-content="template" data-simply-default-value="Header">
       <template data-simply-template='Header' rel="header"></template>
@@ -79,11 +123,16 @@
     </nav>
     <div class="main" data-simply-field="page" data-simply-content="template">
     <!-- Page HTML templates -->
-    
+    <template data-simply-template="homepage">
+      <h1>YOG</h1>
+    <div>
+      <simply-render rel="upload-file"></simply-render>
+    </div>
+    </template>
     <!-- /Page HTML templates -->
     </div>
-    <script src="js/simply.everything.js"></script>
-    <script src="js/simply-edit.js" data-simply-storage="none" data-api-key="muze"></script>
+    <script src="https://cdn.jsdelivr.net/gh/SimplyEdit/simplyview/dist/simply.everything.js"></script>
+    <script src="https://canary.simplyedit.io/1/simply-edit.js" data-simply-storage="none" data-api-key="muze"></script>
     <script>
       /* Transformers */
       editor.transformers = {

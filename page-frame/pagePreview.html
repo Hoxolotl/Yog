@@ -16,6 +16,38 @@
     {{headHtml}}
     <!-- /Head HTML -->
     <script>
+      var simplyDataApi = {};
+      var simplyApp = {};
+      window.addEventListener("simply-content-loaded", function() {
+        simply.bind = false;
+        /* Raw API */
+        var simplyRawApi = {
+          {{rawApi}}
+        };
+        /* End of Raw API */
+        /* Data API */
+        simplyDataApi = {
+          {{dataApi}}
+        };
+        /* End of Data API */
+        simplyApp = simply.app({
+          /* Actions */
+          actions: {
+            {{actions}}
+          },
+          /* /Actions */
+          /* Commands */
+          commands: {
+            {{commands}}
+          },
+          /* /Commands */
+          /* Routes */
+          routes: {
+            {{routes}}
+          }
+          /* /Routes */
+        });
+      });
       function clone(ob) {
         return JSON.parse(JSON.stringify(ob));
       }
@@ -28,6 +60,9 @@
     </script>
   </head>
   <body>
+    <!-- Body HTML -->
+    {{bodyHtml}}
+    <!-- /Body HTML -->
     <!-- Component HTML templates -->
     {{componentTemplates}}
     <!-- /Component HTML templates -->
@@ -38,10 +73,12 @@
       <simply-render rel="menu"></simply-render>
     </nav>
     <div class="main" data-simply-field="page" data-simply-content="template">
-      {{pagePreview}}
+    <!-- Page HTML templates -->
+    {{pageTemplates}}
+    <!-- /Page HTML templates -->
     </div>
-    <script src="js/simply.everything.js"></script>
-    <script src="js/simply-edit.js" data-simply-storage="none" data-api-key="muze"></script>
+    <script src="https://cdn.jsdelivr.net/gh/SimplyEdit/simplyview/dist/simply.everything.js"></script>
+    <script src="https://canary.simplyedit.io/1/simply-edit.js" data-simply-storage="none" data-api-key="muze"></script>
     <script>
       /* Transformers */
       editor.transformers = {
