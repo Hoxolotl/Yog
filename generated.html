@@ -33,12 +33,71 @@
         simplyApp = simply.app({
           /* Actions */
           actions: {
-            
+            "displayFile" : async function(){
+            	console.log("played an action")
+            }
           },
           /* /Actions */
           /* Commands */
           commands: {
+            "parseFile" : async function(el, value) {
+              console.log(el)
+              console.log(value)
             
+              let form = document.querySelector('form[data-js="convert"]')
+              console.log(form)
+            
+              let output = document.getElementById("result")
+            
+              let file = document.getElementById("inputFile").files[0]
+            
+              console.log("got a file!")
+              console.log(file)
+            
+            /*
+              function reader(file, callback) {
+                const fr = new FileReader();
+                fr.onload = () => callback(null, fr.result);
+                fr.onerror = (err) => callback(err);
+                fr.readAsText(file);
+              }
+              */
+              
+              const reader = new FileReader();
+            
+              function readfile(file){
+                reader.onload = (evt) => {
+                  return evt.target.result;
+                  console.log(evt.target.result);
+                };
+                reader.readAsText(file);
+              }
+            
+              console.log("file is loaded")  
+            
+              let fileContent = readfile(file)
+              
+              console.log("FileContent", fileContent) //undefined
+            
+              let yogData = JSON.parse(fileContent)
+            
+              let displayContent = "";
+            
+              console.log(Object.entries(yogData))
+            
+              for (const [key, value] of Object.entries(yogData)) {  
+                console.log(`${key}: ${value}`);
+                displayContent += "<span>" +  "Hello" + "</span>";
+                console.log("ohay!")
+              }
+            
+              console.log(displayContent)
+            
+              output.innerHTML = "hello!" 
+              console.log("command sent")
+            
+              this.app.actions.displayFile(); //todo: refactoring
+            }
           },
           /* /Commands */
           /* Routes */
@@ -75,8 +134,6 @@
     <template id="upload-file">
       <h2>upload-file interface</h2>
     
-    
-    
     <h3>todolist</h3>
     <ul>
       <li>Find out how to cache stuff <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">cache mdn docs</a></li>
@@ -86,33 +143,11 @@
     <style>output {font-family: monospace;white-space: pre;}</style>
     
     <form data-js="convert">
-        <input name="file" required type="file" />
-        <button>Submit</button>
+        <input id="inputFile" name="file" required type="file" />
+        <button data-simply-command="parseFile">Submit</button>
     </form>
     
-    <output></output>
-    
-    <script>
-    
-    const form = document.querySelector('form[data-js="convert"]')
-    const output = document.querySelector('output')
-    
-    form.addEventListener('submit', (event) => {
-            event.preventDefault()
-    
-            const file = event.target.file.files[0]
-    
-            const reader = new FileReader()
-    
-            reader.onload = (event) => {
-                const fileContent = event.target.result
-                
-                output.insertAdjacentHTML('beforeend', fileContent)
-            }
-    
-            reader.readAsText(file)
-        })
-    </script>
+    <div id="result"></div>
     </template>
     <!-- /Component HTML templates -->
     <header data-simply-path="/" data-simply-field="header" data-simply-content="template" data-simply-default-value="Header">

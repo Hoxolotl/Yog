@@ -1,7 +1,5 @@
 <h2>upload-file interface</h2>
 
-
-
 <h3>todolist</h3>
 <ul>
   <li>Find out how to cache stuff <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">cache mdn docs</a></li>
@@ -11,30 +9,8 @@
 <style>output {font-family: monospace;white-space: pre;}</style>
 
 <form data-js="convert">
-    <input name="file" required type="file" />
-    <button>Submit</button>
+    <input id="inputFile" name="file" required type="file" />
+    <button data-simply-command="parseFile">Submit</button>
 </form>
 
-<output></output>
-
-<script>
-
-const form = document.querySelector('form[data-js="convert"]')
-const output = document.querySelector('output')
-
-form.addEventListener('submit', (event) => {
-        event.preventDefault()
-
-        const file = event.target.file.files[0]
-
-        const reader = new FileReader()
-
-        reader.onload = (event) => {
-            const fileContent = event.target.result
-            
-            output.insertAdjacentHTML('beforeend', fileContent)
-        }
-
-        reader.readAsText(file)
-    })
-</script>
+<div id="result"></div>
